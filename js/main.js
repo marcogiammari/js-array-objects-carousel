@@ -5,6 +5,9 @@ const slideText = document.getElementById("text")
 const slideImg = document.getElementById("slide-img");
 const nextBtn = document.getElementById("next-btn");
 const prevBtn = document.getElementById("prev-btn");
+const backBtn = document.getElementById("back-btn");
+const stopBtn = document.getElementById("stop-btn");
+const playBtn = document.getElementById("play-btn");
 let c = 0;
 
 const images = [
@@ -57,8 +60,7 @@ function nextSlide() {
     } else {
         c = 0;
     }
-    slideImg.src = images[c].image;
-    changeText(c);
+    changeSlide(c);
     thumbActive(c);
 }
 
@@ -70,15 +72,14 @@ function prevSlide() {
     } else {
         c = images.length-1;
     }
-    changeText(c);
+    changeSlide(c);
     thumbActive(c);
 }
 
 function clickSlide() {
     thumbInactive(c);
     c = this.counter;
-    slideImg.src = images[c].image;
-    changeText(c);
+    changeSlide(c);
     thumbActive(c);
 }
 
@@ -93,8 +94,31 @@ function thumbActive(i) {
     thumbnails[i].classList.add("active");
 }
 
-function changeText(i) {
+function changeSlide(i) {
     slideImg.src = images[i].image;
     slideTitle.innerText = images[i].title;
     slideText.innerText = images[i].text;
 }
+
+
+// const prova = setInterval(nextSlide, 2000);
+// playBtn.addEventListener("click", function() {
+//     setInterval(nextSlide, 2000)
+// })
+// stopBtn.addEventListener("click", function() {
+//     clearInterval(prova)
+// })
+
+
+let autoplay;
+
+playBtn.addEventListener("click", function() {
+    autoplay = setInterval(nextSlide, 3000);
+})
+backBtn.addEventListener("click", function() {
+    clearInterval(autoplay);
+    autoplay = setInterval(prevSlide, 3000);
+})
+stopBtn.addEventListener("click", function() {
+    clearInterval(autoplay);
+})
