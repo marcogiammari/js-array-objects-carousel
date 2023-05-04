@@ -100,19 +100,10 @@ function changeSlide(i) {
     slideText.innerText = images[i].text;
 }
 
-
-// const prova = setInterval(nextSlide, 2000);
-// playBtn.addEventListener("click", function() {
-//     setInterval(nextSlide, 2000)
-// })
-// stopBtn.addEventListener("click", function() {
-//     clearInterval(prova)
-// })
-
-
 let autoplay;
 
 playBtn.addEventListener("click", function() {
+    clearInterval(autoplay);
     autoplay = setInterval(nextSlide, 3000);
 })
 backBtn.addEventListener("click", function() {
